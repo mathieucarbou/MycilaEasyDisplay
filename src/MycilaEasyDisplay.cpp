@@ -11,8 +11,6 @@
 #define DISPLAY_FONT u8g2_font_5x8_tr
 #define DISPLAY_LINE_HEIGHT_PX 9
 
-static const char* DisplayTypeNames[] = {"SH1106", "SH1107", "SSD1306"};
-
 void Mycila::EasyDisplayClass::begin(EasyDisplayType type, uint8_t clkPin, uint8_t dataPin, uint16_t rotation) {
   if (_enabled)
     return;
@@ -34,7 +32,7 @@ void Mycila::EasyDisplayClass::begin(EasyDisplayType type, uint8_t clkPin, uint8
   }
 
   ESP_LOGI(TAG, "Enable EasyDisplay...");
-  ESP_LOGD(TAG, "- Type: %s", DisplayTypeNames[static_cast<int>(type)]);
+  ESP_LOGD(TAG, "- Type: %s", type);
   ESP_LOGD(TAG, "- Clock Pin: %u", _clkPin);
   ESP_LOGD(TAG, "- Data Pin: %u", _dataPin);
   ESP_LOGD(TAG, "- Rotation: %u°", rotation);
