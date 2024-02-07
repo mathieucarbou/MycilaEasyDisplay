@@ -17,6 +17,14 @@
     "espressif32"
   ],
   "headers": "MycilaEasyDisplay.h",
+  "dependencies": [
+    {
+      "owner": "olikraus",
+      "name": "U8g2",
+      "version": "^2.35.9",
+      "platforms": "espressif32"
+    }
+  ],
   "export": {
     "include": [
       "examples",
