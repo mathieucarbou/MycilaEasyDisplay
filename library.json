@@ -19,6 +19,7 @@
   "headers": "MycilaEasyDisplay.h",
   "export": {
     "include": [
+      "examples",
       "src",
       "library.json",
       "library.properties",
