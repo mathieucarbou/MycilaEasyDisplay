@@ -32,7 +32,7 @@ void Mycila::EasyDisplayClass::begin(EasyDisplayType type, uint8_t clkPin, uint8
   }
 
   ESP_LOGI(TAG, "Enable EasyDisplay...");
-  ESP_LOGD(TAG, "- Type: %s", type);
+  ESP_LOGD(TAG, "- Type: %u", type);
   ESP_LOGD(TAG, "- Clock Pin: %u", _clkPin);
   ESP_LOGD(TAG, "- Data Pin: %u", _dataPin);
   ESP_LOGD(TAG, "- Rotation: %u°", rotation);
