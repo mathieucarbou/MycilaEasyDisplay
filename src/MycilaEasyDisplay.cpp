@@ -11,6 +11,11 @@
 #define DISPLAY_FONT u8g2_font_5x8_tr
 #define DISPLAY_LINE_HEIGHT_PX 9
 
+#ifndef GPIO_IS_VALID_OUTPUT_GPIO
+#define GPIO_IS_VALID_OUTPUT_GPIO(gpio_num) ((gpio_num >= 0) && \
+                                             (((1ULL << (gpio_num)) & SOC_GPIO_VALID_OUTPUT_GPIO_MASK) != 0))
+#endif
+
 void Mycila::EasyDisplayClass::begin(EasyDisplayType type, uint8_t clkPin, uint8_t dataPin, uint16_t rotation) {
   if (_enabled)
     return;
