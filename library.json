@@ -21,7 +21,7 @@
     {
       "owner": "olikraus",
       "name": "U8g2",
-      "version": "^2.35.9",
+      "version": "^2.35.17",
       "platforms": "espressif32"
     }
   ],
