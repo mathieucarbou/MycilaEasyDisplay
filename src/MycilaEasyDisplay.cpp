@@ -23,7 +23,7 @@ void Mycila::EasyDisplayClass::begin(EasyDisplayType type, uint8_t clkPin, uint8
   if (GPIO_IS_VALID_OUTPUT_GPIO(clkPin)) {
     _clkPin = (gpio_num_t)clkPin;
   } else {
-    ESP_LOGE(TAG, "Invalid Clock pin: %u", _clkPin);
+    ESP_LOGE(TAG, "Invalid Clock pin: %" PRIu8, clkPin);
     _clkPin = GPIO_NUM_NC;
     return;
   }
@@ -31,7 +31,7 @@ void Mycila::EasyDisplayClass::begin(EasyDisplayType type, uint8_t clkPin, uint8
   if (GPIO_IS_VALID_OUTPUT_GPIO(dataPin)) {
     _dataPin = (gpio_num_t)dataPin;
   } else {
-    ESP_LOGE(TAG, "Invalid Data pin: %u", _dataPin);
+    ESP_LOGE(TAG, "Invalid Data pin: %" PRIu8, dataPin);
     _dataPin = GPIO_NUM_NC;
     return;
   }
