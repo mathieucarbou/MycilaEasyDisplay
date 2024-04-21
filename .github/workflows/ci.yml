@@ -75,7 +75,7 @@ jobs:
         run: arduino-cli compile --library . --warnings all -b ${{ matrix.board }} "examples/Display/Display.ino"
 
   platformio:
-    name: PlatformIO
+    name: pio ${{ matrix.name }}
     needs: cpplint
     runs-on: ubuntu-latest
     strategy:
