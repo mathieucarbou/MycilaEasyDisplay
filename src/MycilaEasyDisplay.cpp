@@ -40,8 +40,8 @@ void Mycila::EasyDisplayClass::begin(EasyDisplayType type, uint8_t clkPin, uint8
   ESP_LOGD(TAG, "- Type: %u", type);
   ESP_LOGD(TAG, "- Clock Pin: %u", _clkPin);
   ESP_LOGD(TAG, "- Data Pin: %u", _dataPin);
-  ESP_LOGD(TAG, "- Rotation: %u°", rotation);
-  ESP_LOGD(TAG, "- Power Save Delay: %u seconds", _powerSaveDelay);
+  ESP_LOGD(TAG, "- Rotation: %" PRIu16 "°", rotation);
+  ESP_LOGD(TAG, "- Power Save Delay: %" PRIu16 " seconds", _powerSaveDelay);
 
   switch (type) {
     case EasyDisplayType::SSD1306:
