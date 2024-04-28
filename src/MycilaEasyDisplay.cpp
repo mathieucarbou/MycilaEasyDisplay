@@ -162,12 +162,8 @@ void Mycila::EasyDisplayClass::print(const char lines[MYCILA_DISPLAY_LINE_COUNT]
 
   if (changed) {
     _display->clearBuffer();
-    _display->drawStr(1, MYCILA_DISPLAY_LINE_HEIGHT, _lines[0]);
-    _display->drawStr(1, 2 * MYCILA_DISPLAY_LINE_HEIGHT + 1, _lines[1]);
-    _display->drawStr(1, 3 * MYCILA_DISPLAY_LINE_HEIGHT + 2, _lines[2]);
-    _display->drawStr(1, 4 * MYCILA_DISPLAY_LINE_HEIGHT + 3, _lines[3]);
-    _display->drawStr(1, 5 * MYCILA_DISPLAY_LINE_HEIGHT + 4, _lines[4]);
-    _display->drawStr(1, 6 * MYCILA_DISPLAY_LINE_HEIGHT + 5, _lines[5]);
+    for (int i = 0; i < MYCILA_DISPLAY_LINE_COUNT; i++)
+      _display->drawStr(1, (i + 1) * MYCILA_DISPLAY_LINE_HEIGHT + i, _lines[i]);
     _display->sendBuffer();
 
     setActive(true);
