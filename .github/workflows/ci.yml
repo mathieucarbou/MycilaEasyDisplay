@@ -71,8 +71,23 @@ jobs:
       - name: Install U8g2
         run: arduino-cli lib install U8g2
 
-      - name: Build Display
-        run: arduino-cli compile --library . --warnings all -b ${{ matrix.board }} "examples/Display/Display.ino"
+      - name: Build Home
+        run: arduino-cli compile --library . --warnings all -b ${{ matrix.board }} "examples/Home/Home.ino"
+
+      - name: Build PowerSave
+        run: arduino-cli compile --library . --warnings all -b ${{ matrix.board }} "examples/PowerSave/PowerSave.ino"
+
+      - name: Build Virtual
+        run: arduino-cli compile --library . --warnings all -b ${{ matrix.board }} "examples/Virtual/Virtual.ino"
+
+      - name: Build CarouselEnds
+        run: arduino-cli compile --library . --warnings all -b ${{ matrix.board }} "examples/CarouselEnds/CarouselEnds.ino"
+
+      - name: Build CarouselLoops
+        run: arduino-cli compile --library . --warnings all -b ${{ matrix.board }} "examples/CarouselLoops/CarouselLoops.ino"
+
+      - name: Build CarouselTests
+        run: arduino-cli compile --library . --warnings all -b ${{ matrix.board }} "examples/CarouselTests/CarouselTests.ino"
 
   platformio:
     name: pio ${{ matrix.name }}
@@ -130,5 +145,15 @@ jobs:
       - run: pip install platformio
       - run: platformio platform install ${{ matrix.platform }}
 
-      - name: Build Display
-        run: platformio ci "examples/Display/Display.ino" -l '.' -b ${{ matrix.board }} ${{ matrix.opts }}
+      - name: Build Home
+        run: platformio ci "examples/Home/Home.ino" -l '.' -b ${{ matrix.board }} ${{ matrix.opts }}
+      - name: Build PowerSave
+        run: platformio ci "examples/PowerSave/PowerSave.ino" -l '.' -b ${{ matrix.board }} ${{ matrix.opts }}
+      - name: Build Virtual
+        run: platformio ci "examples/Virtual/Virtual.ino" -l '.' -b ${{ matrix.board }} ${{ matrix.opts }}
+      - name: Build CarouselEnds
+        run: platformio ci "examples/CarouselEnds/CarouselEnds.ino" -l '.' -b ${{ matrix.board }} ${{ matrix.opts }}
+      - name: Build CarouselLoops
+        run: platformio ci "examples/CarouselLoops/CarouselLoops.ino" -l '.' -b ${{ matrix.board }} ${{ matrix.opts }}
+      - name: Build CarouselTests
+        run: platformio ci "examples/CarouselTests/CarouselTests.ino" -l '.' -b ${{ matrix.board }} ${{ matrix.opts }}
