@@ -8,9 +8,6 @@
 
 #define TAG "EASY-DISP"
 
-#define DISPLAY_FONT u8g2_font_5x8_tr
-#define DISPLAY_LINE_HEIGHT_PX 9
-
 #ifndef GPIO_IS_VALID_OUTPUT_GPIO
 #define GPIO_IS_VALID_OUTPUT_GPIO(gpio_num) ((gpio_num >= 0) && \
                                              (((1ULL << (gpio_num)) & SOC_GPIO_VALID_OUTPUT_GPIO_MASK) != 0))
@@ -102,7 +99,7 @@ void Mycila::EasyDisplayClass::begin(EasyDisplayType type, uint8_t clkPin, uint8
     _lines[i][0] = '\0';
 
   _display->begin();
-  _display->setFont(DISPLAY_FONT);
+  _display->setFont(MYCILA_DISPLAY_FONT);
   _display->setPowerSave(true);
   _enabled = true;
 }
@@ -165,12 +162,12 @@ void Mycila::EasyDisplayClass::print(const char lines[MYCILA_DISPLAY_LINE_COUNT]
 
   if (changed) {
     _display->clearBuffer();
-    _display->drawStr(1, DISPLAY_LINE_HEIGHT_PX, _lines[0]);
-    _display->drawStr(1, 2 * DISPLAY_LINE_HEIGHT_PX + 1, _lines[1]);
-    _display->drawStr(1, 3 * DISPLAY_LINE_HEIGHT_PX + 2, _lines[2]);
-    _display->drawStr(1, 4 * DISPLAY_LINE_HEIGHT_PX + 3, _lines[3]);
-    _display->drawStr(1, 5 * DISPLAY_LINE_HEIGHT_PX + 4, _lines[4]);
-    _display->drawStr(1, 6 * DISPLAY_LINE_HEIGHT_PX + 5, _lines[5]);
+    _display->drawStr(1, MYCILA_DISPLAY_LINE_HEIGHT, _lines[0]);
+    _display->drawStr(1, 2 * MYCILA_DISPLAY_LINE_HEIGHT + 1, _lines[1]);
+    _display->drawStr(1, 3 * MYCILA_DISPLAY_LINE_HEIGHT + 2, _lines[2]);
+    _display->drawStr(1, 4 * MYCILA_DISPLAY_LINE_HEIGHT + 3, _lines[3]);
+    _display->drawStr(1, 5 * MYCILA_DISPLAY_LINE_HEIGHT + 4, _lines[4]);
+    _display->drawStr(1, 6 * MYCILA_DISPLAY_LINE_HEIGHT + 5, _lines[5]);
     _display->sendBuffer();
 
     setActive(true);
