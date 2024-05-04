@@ -38,7 +38,13 @@ namespace Mycila {
 
   class EasyDisplayClass {
     public:
-      void begin(EasyDisplayType type, uint8_t clkPin, uint8_t dataPin, uint16_t rotation = 0);
+      ~EasyDisplayClass() { end(); }
+
+      void begin(EasyDisplayType type = EasyDisplayType::SH1106,
+                 int8_t clkPin = SCL,
+                 int8_t dataPin = SDA,
+                 uint16_t rotation = 0);
+
       void end();
 
       void setPowerSaveDelay(uint16_t seconds);
