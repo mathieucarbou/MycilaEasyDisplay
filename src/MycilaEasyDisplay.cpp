@@ -6,6 +6,20 @@
 
 #include <assert.h>
 
+#ifdef MYCILA_LOGGER_SUPPORT
+#include <MycilaLogger.h>
+extern Mycila::Logger logger;
+#define LOGD(tag, format, ...) logger.debug(tag, format, ##__VA_ARGS__)
+#define LOGI(tag, format, ...) logger.info(tag, format, ##__VA_ARGS__)
+#define LOGW(tag, format, ...) logger.warn(tag, format, ##__VA_ARGS__)
+#define LOGE(tag, format, ...) logger.error(tag, format, ##__VA_ARGS__)
+#else
+#define LOGD(tag, format, ...) ESP_LOGD(tag, format, ##__VA_ARGS__)
+#define LOGI(tag, format, ...) ESP_LOGI(tag, format, ##__VA_ARGS__)
+#define LOGW(tag, format, ...) ESP_LOGW(tag, format, ##__VA_ARGS__)
+#define LOGE(tag, format, ...) ESP_LOGE(tag, format, ##__VA_ARGS__)
+#endif
+
 #define TAG "EASY-DISP"
 
 #ifndef GPIO_IS_VALID_OUTPUT_GPIO
@@ -20,7 +34,7 @@ void Mycila::EasyDisplay::begin(EasyDisplayType type, int8_t clkPin, int8_t data
   if (GPIO_IS_VALID_OUTPUT_GPIO(clkPin)) {
     _clkPin = (gpio_num_t)clkPin;
   } else {
-    ESP_LOGE(TAG, "Invalid Clock pin: %" PRId8, clkPin);
+    LOGE(TAG, "Invalid Clock pin: %" PRId8, clkPin);
     _clkPin = GPIO_NUM_NC;
     return;
   }
@@ -28,17 +42,12 @@ void Mycila::EasyDisplay::begin(EasyDisplayType type, int8_t clkPin, int8_t data
   if (GPIO_IS_VALID_OUTPUT_GPIO(dataPin)) {
     _dataPin = (gpio_num_t)dataPin;
   } else {
-    ESP_LOGE(TAG, "Invalid Data pin: %" PRId8, dataPin);
+    LOGE(TAG, "Invalid Data pin: %" PRId8, dataPin);
     _dataPin = GPIO_NUM_NC;
     return;
   }
 
-  ESP_LOGI(TAG, "Enable EasyDisplay...");
-  ESP_LOGD(TAG, "- Type: %u", type);
-  ESP_LOGD(TAG, "- Clock Pin: %u", _clkPin);
-  ESP_LOGD(TAG, "- Data Pin: %u", _dataPin);
-  ESP_LOGD(TAG, "- Rotation: %" PRIu16 "°", rotation);
-  ESP_LOGD(TAG, "- Power Save Delay: %" PRIu16 " seconds", _powerSaveDelay);
+  LOGI(TAG, "Enable EasyDisplay on Clock pin %" PRId8 " and Data pin %" PRId8 "...", clkPin, dataPin);
 
   switch (type) {
     case EasyDisplayType::SSD1306:
@@ -107,7 +116,7 @@ void Mycila::EasyDisplay::begin(EasyDisplayType type, int8_t clkPin, int8_t data
 void Mycila::EasyDisplay::end() {
   if (!_enabled)
     return;
-  ESP_LOGI(TAG, "Disable EasyDisplay...");
+  LOGI(TAG, "Disable EasyDisplay...");
   _enabled = false;
   _active = false;
   _display->clear();
@@ -127,7 +136,7 @@ void Mycila::EasyDisplay::setActive(bool active) {
     return;
 
   if (_active && !active) {
-    ESP_LOGD(TAG, "Deactivating display...");
+    LOGD(TAG, "Deactivating display...");
     _powerSaveTicker.detach();
     _display->setPowerSave(true);
     _active = false;
@@ -136,7 +145,7 @@ void Mycila::EasyDisplay::setActive(bool active) {
 
   if (active) {
     if (!_active) {
-      ESP_LOGD(TAG, "Activating display...");
+      LOGD(TAG, "Activating display...");
       _display->setPowerSave(false);
       _active = true;
     }
