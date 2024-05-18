@@ -36,9 +36,9 @@ namespace Mycila {
     SSD1306
   };
 
-  class EasyDisplayClass {
+  class EasyDisplay {
     public:
-      ~EasyDisplayClass() { end(); }
+      ~EasyDisplay() { end(); }
 
       void begin(EasyDisplayType type = EasyDisplayType::SH1106,
                  int8_t clkPin = SCL,
@@ -73,6 +73,4 @@ namespace Mycila {
       gpio_num_t _dataPin = GPIO_NUM_NC;
       char _lines[MYCILA_DISPLAY_LINE_COUNT][MYCILA_DISPLAY_LINE_LENGTH];
   };
-
-  extern EasyDisplayClass EasyDisplay;
 } // namespace Mycila

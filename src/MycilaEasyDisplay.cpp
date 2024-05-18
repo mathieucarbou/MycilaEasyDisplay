@@ -13,7 +13,7 @@
                                              (((1ULL << (gpio_num)) & SOC_GPIO_VALID_OUTPUT_GPIO_MASK) != 0))
 #endif
 
-void Mycila::EasyDisplayClass::begin(EasyDisplayType type, int8_t clkPin, int8_t dataPin, uint16_t rotation) {
+void Mycila::EasyDisplay::begin(EasyDisplayType type, int8_t clkPin, int8_t dataPin, uint16_t rotation) {
   if (_enabled)
     return;
 
@@ -104,7 +104,7 @@ void Mycila::EasyDisplayClass::begin(EasyDisplayType type, int8_t clkPin, int8_t
   _enabled = true;
 }
 
-void Mycila::EasyDisplayClass::end() {
+void Mycila::EasyDisplay::end() {
   if (!_enabled)
     return;
   ESP_LOGI(TAG, "Disable EasyDisplay...");
@@ -116,13 +116,13 @@ void Mycila::EasyDisplayClass::end() {
   _clkPin = GPIO_NUM_NC;
 }
 
-void Mycila::EasyDisplayClass::setPowerSaveDelay(uint16_t seconds) {
+void Mycila::EasyDisplay::setPowerSaveDelay(uint16_t seconds) {
   _powerSaveDelay = seconds;
   if (_powerSaveDelay == 0)
     setActive(true);
 }
 
-void Mycila::EasyDisplayClass::setActive(bool active) {
+void Mycila::EasyDisplay::setActive(bool active) {
   if (!_enabled)
     return;
 
@@ -143,12 +143,12 @@ void Mycila::EasyDisplayClass::setActive(bool active) {
     _powerSaveTicker.detach();
     if (_powerSaveDelay > 0)
       _powerSaveTicker.once(
-        _powerSaveDelay, +[](EasyDisplayClass* instance) { instance->setActive(false); }, this);
+        _powerSaveDelay, +[](EasyDisplay* instance) { instance->setActive(false); }, this);
     return;
   }
 }
 
-void Mycila::EasyDisplayClass::print(const char lines[MYCILA_DISPLAY_LINE_COUNT][MYCILA_DISPLAY_LINE_LENGTH]) {
+void Mycila::EasyDisplay::print(const char lines[MYCILA_DISPLAY_LINE_COUNT][MYCILA_DISPLAY_LINE_LENGTH]) {
   if (!_enabled)
     return;
 
@@ -169,7 +169,3 @@ void Mycila::EasyDisplayClass::print(const char lines[MYCILA_DISPLAY_LINE_COUNT]
     setActive(true);
   }
 }
-
-namespace Mycila {
-  EasyDisplayClass EasyDisplay;
-} // namespace Mycila
