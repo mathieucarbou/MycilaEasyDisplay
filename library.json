@@ -1,7 +1,7 @@
 {
   "name": "MycilaEasyDisplay",
-  "version": "2.1.0",
-  "description": "Easy to use Arduino / ESP32 library for SH1106, SH1107, SSD1306 OLED I2C displays",
+  "version": "3.0.0",
+  "description": "Easy to use Arduino / ESP32 library for SH1106, SH1107, SSD1306 OLED I2C displays, virtual displays and carousels",
   "homepage": "https://github.com/mathieucarbou/MycilaEasyDisplay",
   "repository": {
     "type": "git",

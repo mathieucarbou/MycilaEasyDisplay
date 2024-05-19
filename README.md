@@ -4,7 +4,7 @@
 [![Continuous Integration](https://github.com/mathieucarbou/MycilaEasyDisplay/actions/workflows/ci.yml/badge.svg)](https://github.com/mathieucarbou/MycilaEasyDisplay/actions/workflows/ci.yml)
 [![PlatformIO Registry](https://badges.registry.platformio.org/packages/mathieucarbou/library/MycilaEasyDisplay.svg)](https://registry.platformio.org/libraries/mathieucarbou/MycilaEasyDisplay)
 
-Easy to use Arduino / ESP32 library for SH1106, SH1107, SSD1306 OLED I2C displays
+Easy to use Arduino / ESP32 library for SH1106, SH1107, SSD1306 OLED I2C displays, virtual displays and carousels
 
 ## Features
 
