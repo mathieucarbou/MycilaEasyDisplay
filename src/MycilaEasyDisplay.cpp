@@ -107,6 +107,7 @@ void Mycila::EasyDisplay::begin(EasyDisplayType type, int8_t clkPin, int8_t data
   }
 
   _display->begin();
+  _display->enableUTF8Print();
   _display->setPowerSave(true);
   _enabled = true;
 }
