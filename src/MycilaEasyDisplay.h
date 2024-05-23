@@ -222,6 +222,8 @@ namespace Mycila {
       gpio_num_t getClockPin() const { return _clkPin; }
       gpio_num_t getDataPin() const { return _dataPin; }
 
+      U8G2& u8g2() { return *_display; }
+
       const VirtualDisplay* getCurrentDisplay() const { return _currentDisplay; }
 
       void clearDisplay() {
