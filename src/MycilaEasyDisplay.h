@@ -118,6 +118,11 @@ namespace Mycila {
       VirtualDisplay6x21() : VirtualDisplay(6, 21, 1, u8g2_font_6x10_tf) {}
   };
 
+  class VirtualDisplay5x21 : public VirtualDisplay {
+    public:
+      VirtualDisplay5x21() : VirtualDisplay(5, 21, 4, u8g2_font_6x12_tf) {}
+  };
+
   class VirtualDisplay5x18 : public VirtualDisplay {
     public:
       VirtualDisplay5x18() : VirtualDisplay(5, 18, 1, u8g2_font_7x13_tf) {}
