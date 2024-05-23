@@ -11,9 +11,9 @@
 
 #include <vector>
 
-#define MYCILA_EASY_DISPLAY_VERSION "3.0.0"
-#define MYCILA_EASY_DISPLAY_VERSION_MAJOR 3
-#define MYCILA_EASY_DISPLAY_VERSION_MINOR 0
+#define MYCILA_EASY_DISPLAY_VERSION          "3.0.0"
+#define MYCILA_EASY_DISPLAY_VERSION_MAJOR    3
+#define MYCILA_EASY_DISPLAY_VERSION_MINOR    0
 #define MYCILA_EASY_DISPLAY_VERSION_REVISION 0
 
 #ifndef MYCILA_DISPLAY_LINE_LENGTH
@@ -159,6 +159,11 @@ namespace Mycila {
       };
 
     public:
+      EasyDisplay(const uint8_t lines = MYCILA_DISPLAY_LINES,
+                  const uint8_t lineLength = MYCILA_DISPLAY_LINE_LENGTH,
+                  const int8_t lineHeightOffset = MYCILA_DISPLAY_LINE_HEIGHT_OFFSET,
+                  const uint8_t* font = MYCILA_DISPLAY_FONT) : home(lines, lineLength, lineHeightOffset, font) {}
+
       ~EasyDisplay() { end(); }
 
       void begin(EasyDisplayType type = EasyDisplayType::SH1106,
@@ -200,7 +205,9 @@ namespace Mycila {
           _powerSaveTicker.detach();
           if (_powerSaveDelay > 0)
             _powerSaveTicker.once(
-              _powerSaveDelay, +[](EasyDisplay* instance) { instance->setActive(false); }, this);
+              _powerSaveDelay,
+              +[](EasyDisplay* instance) { instance->setActive(false); },
+              this);
           return;
         }
       }
