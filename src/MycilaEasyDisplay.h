@@ -5,7 +5,6 @@
 #pragma once
 
 #include <Ticker.h>
-#include <WString.h>
 
 #include <U8g2lib.h>
 
