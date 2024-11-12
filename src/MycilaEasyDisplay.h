@@ -54,14 +54,23 @@ namespace Mycila {
         }
       }
 
-      VirtualDisplay(const VirtualDisplay& rval) : _lines(rval._lines),
-                                                   _lineLength(rval._lineLength),
-                                                   _font(rval._font),
-                                                   _buffer(new uint8_t[rval._lines * rval._lineLength]) {
-        memcpy(_buffer, rval._buffer, _lines * _lineLength);
+      VirtualDisplay(const VirtualDisplay& display) : _lines(display._lines),
+                                                      _lineLength(display._lineLength),
+                                                      _font(display._font),
+                                                      _buffer(new uint8_t[display._lines * display._lineLength]) {
+        memcpy(_buffer, display._buffer, _lines * _lineLength);
         begin(_lineLength, _lines, _buffer);
-        setLineHeightOffset(rval.getLineHeightOffset());
+        setLineHeightOffset(display.getLineHeightOffset());
       };
+
+      VirtualDisplay(VirtualDisplay&& display) : _lines(display._lines),
+                                                 _lineLength(display._lineLength),
+                                                 _font(display._font),
+                                                 _buffer(display._buffer) {
+        display._buffer = nullptr;
+        display._font = nullptr;
+        setLineHeightOffset(display.getLineHeightOffset());
+      }
 
       virtual ~VirtualDisplay() {
         delete[] _buffer;
