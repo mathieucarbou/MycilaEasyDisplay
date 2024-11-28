@@ -8,6 +8,7 @@
 
 #include <U8g2lib.h>
 
+#include <mutex>
 #include <vector>
 
 #define MYCILA_EASY_DISPLAY_VERSION          "3.0.2"
@@ -187,6 +188,7 @@ namespace Mycila {
       void end() {
         if (!_enabled)
           return;
+        std::lock_guard<std::mutex> lock(_mutex);
         _enabled = false;
         _active = false;
         _display->clear();
@@ -202,6 +204,8 @@ namespace Mycila {
       void setActive(bool active) {
         if (!_enabled)
           return;
+
+        std::lock_guard<std::mutex> lock(_mutex);
 
         if (_active && !active) {
           _powerSaveTicker.detach();
@@ -242,6 +246,7 @@ namespace Mycila {
       void clearDisplay() {
         if (!_enabled)
           return;
+        std::lock_guard<std::mutex> lock(_mutex);
         _display->clear();
         _currentDisplay = nullptr;
         _lastDisplayMillis = 0;
@@ -251,6 +256,7 @@ namespace Mycila {
       void display(const VirtualDisplay& vDisplay) {
         if (!_enabled)
           return;
+        std::lock_guard<std::mutex> lock(_mutex);
         if (vDisplay._lines) {
           _display->clearBuffer();
           _display->firstPage();
@@ -343,5 +349,6 @@ namespace Mycila {
       Ticker _powerSaveTicker;
       const VirtualDisplay* _currentDisplay = nullptr;
       uint32_t _lastDisplayMillis = 0;
+      std::mutex _mutex;
   };
 } // namespace Mycila
