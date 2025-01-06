@@ -338,7 +338,6 @@ namespace Mycila {
       VirtualDisplay home;
 
     private:
-      static const VirtualDisplayBlank BLANK;
       EasyDisplayType _display_type = EasyDisplayType::SH1106;
       gpio_num_t _clkPin = GPIO_NUM_NC;
       gpio_num_t _dataPin = GPIO_NUM_NC;
