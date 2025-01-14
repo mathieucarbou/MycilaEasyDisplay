@@ -192,6 +192,9 @@ namespace Mycila {
         _enabled = false;
         _active = false;
         _display->clear();
+#ifdef U8G2_USE_DYNAMIC_ALLOC
+        delete _display->getBufferPtr();
+#endif
         delete _display;
         _dataPin = GPIO_NUM_NC;
         _clkPin = GPIO_NUM_NC;

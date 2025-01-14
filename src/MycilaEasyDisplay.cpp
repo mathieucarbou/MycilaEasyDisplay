@@ -47,11 +47,6 @@ void Mycila::EasyDisplay::begin(EasyDisplayType type, int8_t clkPin, int8_t data
 
   LOGI(TAG, "Enable EasyDisplay on Clock pin %" PRId8 " and Data pin %" PRId8 "...", clkPin, dataPin);
 
-  pinMode(_clkPin, OUTPUT);
-  pinMode(_dataPin, OUTPUT);
-  digitalWrite(_clkPin, 0);
-  digitalWrite(_dataPin, 0);
-
   switch (type) {
     case EasyDisplayType::SSD1306:
       switch (rotation) {
@@ -107,6 +102,11 @@ void Mycila::EasyDisplay::begin(EasyDisplayType type, int8_t clkPin, int8_t data
   }
 
   _display->begin();
+#ifdef U8G2_USE_DYNAMIC_ALLOC
+  _display->setBufferPtr(new uint8_t[_display->getBufferSize()]);
+  _display->initDisplay();
+#endif
+  _display->clearDisplay();
   _display->enableUTF8Print();
   _display->setPowerSave(true);
   _enabled = true;
