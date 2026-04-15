@@ -210,25 +210,19 @@ namespace Mycila {
 
         std::lock_guard<std::mutex> lock(_mutex);
 
-        if (_active && !active) {
-          _powerSaveTicker.detach();
-          _display->setPowerSave(true);
-          _active = false;
-          return;
-        }
-
         if (active) {
-          if (!_active) {
-            _display->setPowerSave(false);
-            _active = true;
-          }
+          _display->setPowerSave(false);
+          _active = true;
           _powerSaveTicker.detach();
           if (_powerSaveDelay > 0)
             _powerSaveTicker.once(
               _powerSaveDelay,
               +[](EasyDisplay* instance) { instance->setActive(false); },
               this);
-          return;
+        } else {
+          _powerSaveTicker.detach();
+          _display->setPowerSave(true);
+          _active = false;
         }
       }
 
@@ -346,8 +340,8 @@ namespace Mycila {
       gpio_num_t _dataPin = GPIO_NUM_NC;
       U8G2* _display;
       bool _enabled = false;
-      volatile bool _active = false;
-      volatile uint16_t _powerSaveDelay;
+      bool _active = false;
+      uint16_t _powerSaveDelay = 0;
       Ticker _powerSaveTicker;
       const VirtualDisplay* _currentDisplay = nullptr;
       uint32_t _lastDisplayMillis = 0;
